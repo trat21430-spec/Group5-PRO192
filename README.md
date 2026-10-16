@@ -11,7 +11,7 @@
 ![Class](https://img.shields.io/badge/Class-SE21B-green)
 ![Semester](https://img.shields.io/badge/Semester-FA26-purple)
 
-`FPTU-FA26-PRO192-SE21B-GroupXX`
+`FPTU-FA26-PRO192-SE21B-Group5`
 
 </div>
 
