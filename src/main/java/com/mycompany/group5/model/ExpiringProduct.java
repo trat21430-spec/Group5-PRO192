@@ -19,13 +19,13 @@ public class ExpiringProduct extends Product{
             throw new IllegalArgumentException ("Sale date must not be null");
         }
         if (quantity < 1 || quantity >1000) {
-            throw new IllegalArgumentException("Quantity must be from 1 to"+ 1000 + "product" + super.getId());
+            throw new IllegalArgumentException("Quantity must be from 1 to "+ 1000 + " product " + super.getId());
         }
         if (quantity > super.getInventory()){
-            throw new IllegalArgumentException("Not enough stock for product" + super.getId()+ ":available" + super.getInventory() + "requested" + quantity);
+            throw new IllegalArgumentException("Not enough stock for product " + super.getId() + " :available " + super.getInventory() + " requested " + quantity);
         }
         if (saleDate.isAfter(this.expiryDate)){
-            throw new IllegalArgumentException("Product" +super.getId()+"expired on" +this.expiryDate);
+            throw new IllegalArgumentException("Product " + super.getId() + " expired on " +this.expiryDate);
         }
     }
     public LocalDate getExpiryDate(){
