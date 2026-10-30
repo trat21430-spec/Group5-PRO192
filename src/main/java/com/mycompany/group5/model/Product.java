@@ -61,7 +61,7 @@ public abstract class Product {
     }
 
     public void setPrice(long price) {
-        if (price < 0 || price <10000000) {
+        if (price < 0 || price >10000000) {
             throw new IllegalArgumentException("Price must not be negative.");
         }
         this.price = price;
