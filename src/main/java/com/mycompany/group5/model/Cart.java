@@ -14,33 +14,73 @@ public class Cart {
     private LocalDate saleDate;
     private Map<String, CartItem> item;
     private boolean confirmed;
-
+    
+    public Cart(LocalDate saleDate){
+        this(saleDate, null, false);
+    }
     public Cart(LocalDate saleDate, Map<String, CartItem> item, boolean confirmed){
-            if(saleDate == null){
+            
+            if(saleDate != null){
             this.saleDate = saleDate;
             }
+            else{
+                this.saleDate = LocalDate.now();
+            }
             if(item != null){
-                this.item = item.trim().toUpperCase();
-            }else{this.item = "";}
+                
+               this.item = new LinkedHashMap<>(items);
+            }
+            else{
+                this.item = new LinkedHashMap<>();
+                }
             this.confirmed = confirmed;
     } 
     public boolean addItem(String productId, int quantity){
-        if(productId == null || quantity < 0 && quantity > 1000){
-            this.productId = productId.trim().toUpperCase();
+        if(this.confirmed || productId == null || productId.trim().isEmpty() || quantity < 1 || quantity > 1000 ){
+            return false;
         }
     }
+    String id = productId.trim().toUpperCase();
+    CartItem existing = this.item.get(id);
+        if (existing != null){
+            if (existing.getQuantity() + quantity > 1000){
+                return false;
+            }
+            existing.addQuantity(quantity);
+            return true;
+        }else{
+            if (this.items.size() > = 20){
+                return false;
+            }
+            this.item.put(id, new, CartItem(id, quantity));
+            return true;
+        }
+   
+    public boolean updateQuantity(String productId, int newQuantity){
 
-    public boolean updateQuantity(String productId, int newQuantity){}
+    }
 
-    public boolean removeItem(String productId){}
+    public boolean removeItem(String productId){
 
-    public LocalDate getSaleDate(){return this.saleDate;}
+    }
 
-    public Map<String CartItem> getItem(){return this.items;}
+    public LocalDate getSaleDate(){
+        return this.saleDate;
+        }
 
-    public boolean isConfirmed(){return this.confirmed = confirmed;}
+    public Map<String CartItem> getItem(){
+        return this.items;
+        }
 
-    public void setConfirmed(boolean confirmed){this confirmed;}
+    public boolean isConfirmed(){
+        return this.confirmed = confirmed;
+        }
+
+    public void setConfirmed(boolean confirmed){
+        this.confirmed;
+        }
     
-    public int getItemCount(){}
+    public int getItemCount(){
+        
+    }
 }
