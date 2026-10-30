@@ -61,7 +61,7 @@ public class Cart {
     }
     String id = productId.trim().toUpperCase();
     CartItem item = this.items.get(id);
-        if (items == null){
+        if (item == null){
             return false;
         }
     items.setQuantity(newQuantity);
