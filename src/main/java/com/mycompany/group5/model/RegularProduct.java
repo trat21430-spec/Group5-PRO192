@@ -18,7 +18,7 @@ public class RegularProduct extends Product{
             throw new IllegalArgumentException("Quantity must be from 1 to " + 1000 +" product " + super.getId());
         }
         if (quantity >super.getInventory()){
-            throw new IllegalArgumentException("Not enough stock for product " + super.getId() + " :available " + super.getInventory() + " requested " +quantity);
+            throw new IllegalArgumentException("Not enough stock for product " + super.getId() + " :available " + super.getInventory() + " requested " + quantity);
         }
         }
     }
