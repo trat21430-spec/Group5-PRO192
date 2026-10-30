@@ -6,7 +6,7 @@ public class ExpiringProduct extends Product{
     private static final int MAX_SALE_QUANTITY = 1000;
     private LocalDate expiryDate;
 
-    public ExpiringProduct(LocalDate expiryDate, String id, String name, long price, int inventory) {
+    public ExpiringProduct(String id, String name, long price, int inventory,LocalDate expiryDate) {
         super(id, name, price, inventory);
         if(expiryDate ==null){
             throw new IllegalArgumentException("Expiry date must not be null.");
