@@ -42,8 +42,8 @@
 
 ## 4. Phần người thực hiện tự kiểm tra / chỉnh sửa
 - [X] Đọc hiểu toàn bộ code, đối chiếu với diagram (tên field, method, kiểu trả về).
-- [ ] Biên dịch và chạy thử.
-- [ ] Viết test nhỏ (thêm trùng sản phẩm, update, remove, giỏ đã confirmed).
+- [X] Biên dịch và chạy thử.
+- [X] Viết test nhỏ (thêm trùng sản phẩm, update, remove, giỏ đã confirmed).
 - [X] Tự gõ tay các chỉnh sửa theo review nhóm trưởng (không copy-paste). Từ 30/10/2026, khung code `CartItem`, `Cart` do người thực hiện tự gõ theo diagram; AI chỉ hướng dẫn logic.
 - [x] Ghi lại các chỗ tự sửa so với bản AI: 
     + Từ chối dùng Exception: Bản code AI sinh ra ngày 28/10 dùng throw new Exception để chặn dữ liệu. Tôi bác bỏ và tự code lại bằng cấu trúc if-else (trả false hoặc im lặng bỏ qua) để phù hợp yêu cầu môn học.
