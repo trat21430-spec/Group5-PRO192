@@ -3,7 +3,6 @@ package com.mycompany.group5.model;
 import java.time.LocalDate;
     
 public class ExpiringProduct extends Product{
-    private static final int MAX_SALE_QUANTITY = 1000;
     private LocalDate expiryDate;
 
     public ExpiringProduct(String id, String name, long price, int inventory,LocalDate expiryDate) {
