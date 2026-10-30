@@ -28,7 +28,7 @@ public class Cart {
             }
             if(item != null){
                 
-               this.item = new LinkedHashMap<>(items);
+               this.item = new LinkedHashMap<>(item);
             }
             else{
                 this.item = new LinkedHashMap<>();
@@ -39,9 +39,8 @@ public class Cart {
         if(this.confirmed || productId == null || productId.trim().isEmpty() || quantity < 1 || quantity > 1000 ){
             return false;
         }
-    }
-    String id = productId.trim().toUpperCase();
-    CartItem existing = this.item.get(id);
+        String id = productId.trim().toUpperCase();
+        CartItem existing = this.item.get(id);
         if (existing != null){
             if (existing.getQuantity() + quantity > 1000){
                 return false;
@@ -49,19 +48,31 @@ public class Cart {
             existing.addQuantity(quantity);
             return true;
         }else{
-            if (this.items.size() > = 20){
+            if (this.item.size() >= 20){
                 return false;
             }
-            this.item.put(id, new, CartItem(id, quantity));
+            this.item.put(id, new CartItem(id, quantity));
             return true;
         }
-   
-    public boolean updateQuantity(String productId, int newQuantity){
-
     }
-
+    public boolean updateQuantity(String productId, int newQuantity){
+        if(this.confirmed || productId == null || newQuantity < 1 || newQuantity > 1000){
+            return false;
+    }
+    String id = productId.trim().toUpperCase();
+    CartItem item = this.item.get(id);
+        if (item == null){
+            return false;
+        }
+    item.setQuantity(newQuantity);
+    return true;
+    }
     public boolean removeItem(String productId){
-
+        if (this.confirmed || productId == null){
+            return false;
+        }
+        String id = productId.trim().toUpperCase();
+        return this.item.remove(id) != null;
     }
 
     public LocalDate getSaleDate(){
@@ -69,18 +80,18 @@ public class Cart {
         }
 
     public Map<String CartItem> getItem(){
-        return this.items;
+        return Collections.unmodifiableMap(this.item);
         }
 
     public boolean isConfirmed(){
-        return this.confirmed = confirmed;
+        return this.confirmed;
         }
 
     public void setConfirmed(boolean confirmed){
-        this.confirmed;
+        this.confirmed = confirmed;
         }
     
     public int getItemCount(){
-        
+        return this.item.size();
     }
 }
