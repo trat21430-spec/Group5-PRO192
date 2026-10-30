@@ -12,13 +12,13 @@ import java.util.Map;
 public class Cart {
 
     private LocalDate saleDate;
-    private Map<String, CartItem> item;
+    private Map<String, CartItem> items;
     private boolean confirmed;
     
     public Cart(LocalDate saleDate){
         this(saleDate, null, false);
     }
-    public Cart(LocalDate saleDate, Map<String, CartItem> item, boolean confirmed){
+    public Cart(LocalDate saleDate, Map<String, CartItem> items, boolean confirmed){
             
             if(saleDate != null){
             this.saleDate = saleDate;
@@ -26,12 +26,12 @@ public class Cart {
             else{
                 this.saleDate = LocalDate.now();
             }
-            if(item != null){
+            if(items != null){
                 
-               this.item = new LinkedHashMap<>(item);
+               this.item = new LinkedHashMap<>(items);
             }
             else{
-                this.item = new LinkedHashMap<>();
+                this.items = new LinkedHashMap<>();
                 }
             this.confirmed = confirmed;
     } 
@@ -40,7 +40,7 @@ public class Cart {
             return false;
         }
         String id = productId.trim().toUpperCase();
-        CartItem existing = this.item.get(id);
+        CartItem existing = this.items.get(id);
         if (existing != null){
             if (existing.getQuantity() + quantity > 1000){
                 return false;
@@ -48,10 +48,10 @@ public class Cart {
             existing.addQuantity(quantity);
             return true;
         }else{
-            if (this.item.size() >= 20){
+            if (this.items.size() >= 20){
                 return false;
             }
-            this.item.put(id, new CartItem(id, quantity));
+            this.items.put(id, new CartItem(id, quantity));
             return true;
         }
     }
@@ -60,8 +60,8 @@ public class Cart {
             return false;
     }
     String id = productId.trim().toUpperCase();
-    CartItem item = this.item.get(id);
-        if (item == null){
+    CartItem items = this.items.get(id);
+        if (items == null){
             return false;
         }
     item.setQuantity(newQuantity);
@@ -72,15 +72,15 @@ public class Cart {
             return false;
         }
         String id = productId.trim().toUpperCase();
-        return this.item.remove(id) != null;
+        return this.items.remove(id) != null;
     }
 
     public LocalDate getSaleDate(){
         return this.saleDate;
         }
 
-    public Map<String CartItem> getItem(){
-        return Collections.unmodifiableMap(this.item);
+    public Map<String, CartItem> getItems(){
+        return Collections.unmodifiableMap(this.items);
         }
 
     public boolean isConfirmed(){
@@ -92,6 +92,6 @@ public class Cart {
         }
     
     public int getItemCount(){
-        return this.item.size();
+        return this.items.size();
     }
 }
