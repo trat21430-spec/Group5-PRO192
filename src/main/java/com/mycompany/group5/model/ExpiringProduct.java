@@ -1,6 +1,5 @@
 package com.mycompany.group5.model;
 
-import com.mycompany.group5.exception.SaleValidationException;
 import java.time.LocalDate;
     
 public class ExpiringProduct extends Product{
