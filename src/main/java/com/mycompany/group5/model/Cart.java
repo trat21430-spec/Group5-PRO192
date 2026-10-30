@@ -28,7 +28,7 @@ public class Cart {
             }
             if(items != null){
                 
-               this.item = new LinkedHashMap<>(items);
+               this.items = new LinkedHashMap<>(items);
             }
             else{
                 this.items = new LinkedHashMap<>();
@@ -64,7 +64,7 @@ public class Cart {
         if (items == null){
             return false;
         }
-    item.setQuantity(newQuantity);
+    items.setQuantity(newQuantity);
     return true;
     }
     public boolean removeItem(String productId){
