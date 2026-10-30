@@ -64,7 +64,7 @@ public class Cart {
         if (item == null){
             return false;
         }
-    items.setQuantity(newQuantity);
+    item.setQuantity(newQuantity);
     return true;
     }
     public boolean removeItem(String productId){
