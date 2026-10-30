@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public abstract class Product {
 
-    private static final int MAX_INVENTORY = 100000;
+
 
     private String id;
     private String name;
@@ -28,40 +28,41 @@ public abstract class Product {
         this.setPrice(price);
 
 
-        if (inventory < 0 || inventory > MAX_INVENTORY) {
-            throw new IllegalArgumentException("Inventory must be from 0 to " + MAX_INVENTORY + ".");
+        if (inventory < 0 || inventory > 100000) {
+            throw new IllegalArgumentException("Inventory must be from 0 to " + 100000 + ".");
         }
         this.inventory = inventory;
     }
 
     public abstract void validateSale(LocalDate saleDate, int quantity);
 
-    public String getId() {
+    public String getId(){
         return this.id;
     }
 
-    public String getName() {
+    public String getName(){
         return this.name;
     }
-
-    public void setName(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Product name must not be null.");
-        }
-         String newName = name.trim();
-        if (newName.isEmpty()) {
-            throw new IllegalArgumentException("Product name must not be empty.");
-        }
-        this.name = newName;
+    public void setName(String name){
+    if (name == null) {
+        throw new IllegalArgumentException("Product name must not be null.");
     }
-
+    String newName = name.trim();
+    if (newName.isEmpty()) {
+        throw new IllegalArgumentException("Product name must not be empty.");
+    }
+    if (newName.length() > 80) {
+        throw new IllegalArgumentException("Product name must not exceed 80 characters.");
+    }
+    this.name = newName;
+}
     public long getPrice() {
         return this.price;
     }
 
     public void setPrice(long price) {
-        if (price < 0) {
-            throw new IllegalArgumentException("Price must not be negative.");
+        if (price <= 0 || price >10000000) {
+            throw new IllegalArgumentException("Price must not be negativeand must not exceed 10000000.");
         }
         this.price = price;
     }
@@ -75,7 +76,7 @@ public abstract class Product {
             return false;
         }
   
-        if (amount > MAX_INVENTORY - this.inventory) {
+        if (amount > 100000 - this.inventory) {
             return false;
         }
         this.inventory += amount;
