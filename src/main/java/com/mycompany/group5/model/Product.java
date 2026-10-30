@@ -36,25 +36,26 @@ public abstract class Product {
 
     public abstract void validateSale(LocalDate saleDate, int quantity);
 
-    public String getId() {
+    public String getId(){
         return this.id;
     }
 
-    public String getName() {
+    public String getName(){
         return this.name;
     }
-
-    public void setName(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Product name must not be null.");
-        }
-         String newName = name.trim();
-        if (newName.isEmpty()) {
-            throw new IllegalArgumentException("Product name must not be empty.");
-        }
-        this.name = newName;
+    public void setName(String name){
+    if (name == null) {
+        throw new IllegalArgumentException("Product name must not be null.");
     }
-
+    String newName = name.trim();
+    if (newName.isEmpty()) {
+        throw new IllegalArgumentException("Product name must not be empty.");
+    }
+    if (newName.length() > 80) {
+        throw new IllegalArgumentException("Product name must not exceed 80 characters.");
+    }
+    this.name = newName;
+}
     public long getPrice() {
         return this.price;
     }
