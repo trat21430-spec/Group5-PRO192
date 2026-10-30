@@ -9,7 +9,7 @@ public class CartItem {
     private String productId;
     private int quantity;
     
-        public CartItem(String productId, int quantity) {
+    public CartItem(String productId, int quantity) {
             //Chuan hoa ma san pham
             if(productId != null){
                 this.productId = productId.trim().toUpperCase();
