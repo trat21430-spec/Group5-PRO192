@@ -60,7 +60,7 @@ public class Cart {
             return false;
     }
     String id = productId.trim().toUpperCase();
-    CartItem items = this.items.get(id);
+    CartItem item = this.items.get(id);
         if (items == null){
             return false;
         }
