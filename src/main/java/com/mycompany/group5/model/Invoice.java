@@ -10,9 +10,10 @@ public class Invoice {
     private String invoiceId;
     private LocalDate saleDate;
     private List<InvoiceLine> lines;
-    private long totalAmount;
+    private long subtotal;
+    private long discount;
+    private long total;
 
-   
     public Invoice(String invoiceId, LocalDate saleDate, List<InvoiceLine> lines) {
         if (invoiceId == null || invoiceId.trim().isEmpty()) {
             throw new IllegalArgumentException("Invoice id must not be null or empty.");
@@ -30,52 +31,55 @@ public class Invoice {
         this.invoiceId = invoiceId.trim().toUpperCase();
         this.saleDate = saleDate;
         this.lines = new ArrayList<>();
-
-        long sum = 0;
         for (InvoiceLine line : lines) {
             if (line == null) {
                 throw new IllegalArgumentException("Invoice line must not be null.");
             }
             this.lines.add(line);
+        }
+
+        this.calculateAmounts();
+    }
+
+    private void calculateAmounts() {
+        long sum = 0;
+        for (InvoiceLine line : this.lines) {
             sum += line.getLineTotal();
         }
-        this.totalAmount = sum;
+        this.subtotal = sum;
+
+        if (this.subtotal >= 1000000) {
+            this.discount = (this.subtotal * 10) / 100;
+        } else if (this.subtotal >= 500000) {
+            this.discount = (this.subtotal * 5) / 100;
+        } else {
+            this.discount = 0;
+        }
+
+        this.total = this.subtotal - this.discount;
     }
 
     public String getInvoiceId() {
         return this.invoiceId;
     }
 
-    public void setInvoiceId(String invoiceId) {
-        this.invoiceId = invoiceId;
-    }
-
     public LocalDate getSaleDate() {
         return this.saleDate;
-    }
-
-    public void setSaleDate(LocalDate saleDate) {
-        this.saleDate = saleDate;
     }
 
     public List<InvoiceLine> getLines() {
         return Collections.unmodifiableList(this.lines);
     }
 
-    public void setLines(List<InvoiceLine> lines) {
-        this.lines = lines;
+    public long getSubtotal() {
+        return this.subtotal;
     }
 
-   
-    public long getTotalAmount() {
-        return this.totalAmount;
+    public long getDiscount() {
+        return this.discount;
     }
 
-    public void setTotalAmount(long totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public int getLineCount() {
-        return this.lines.size();
+    public long getTotal() {
+        return this.total;
     }
 }
