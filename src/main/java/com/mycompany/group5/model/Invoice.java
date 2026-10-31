@@ -2,6 +2,7 @@ package com.mycompany.group5.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Invoice {
@@ -9,35 +10,36 @@ public class Invoice {
     private String invoiceId;
     private LocalDate saleDate;
     private List<InvoiceLine> lines;
-    private long toatalAmount;
+    private long totalAmount;
 
-    public Invoice(String invoiceId, LocalDate saleDate, List<InvoiceLine> lines, long toatalAmount) {
-        if (this.invoiceId == null || this.invoiceId.trim().isEmpty()) {
+   
+    public Invoice(String invoiceId, LocalDate saleDate, List<InvoiceLine> lines) {
+        if (invoiceId == null || invoiceId.trim().isEmpty()) {
             throw new IllegalArgumentException("Invoice id must not be null or empty.");
-
         }
-        if (this.saleDate == null) {
+        if (saleDate == null) {
             throw new IllegalArgumentException("Sale date must not be null.");
         }
-        if (this.lines == null || this.lines.isEmpty()) {
+        if (lines == null || lines.isEmpty()) {
             throw new IllegalArgumentException("Invoice must contain at least one line.");
         }
-        if (this.lines.size() > 20) {
+        if (lines.size() > 20) {
             throw new IllegalArgumentException("Invoice must not exceed 20 lines.");
         }
+
         this.invoiceId = invoiceId.trim().toUpperCase();
         this.saleDate = saleDate;
         this.lines = new ArrayList<>();
+
         long sum = 0;
-        for (InvoiceLine line : this.lines) {
+        for (InvoiceLine line : lines) {
             if (line == null) {
                 throw new IllegalArgumentException("Invoice line must not be null.");
             }
             this.lines.add(line);
             sum += line.getLineTotal();
-
         }
-        this.toatalAmount = sum;
+        this.totalAmount = sum;
     }
 
     public String getInvoiceId() {
@@ -57,23 +59,23 @@ public class Invoice {
     }
 
     public List<InvoiceLine> getLines() {
-        return this.lines;
+        return Collections.unmodifiableList(this.lines);
     }
 
     public void setLines(List<InvoiceLine> lines) {
         this.lines = lines;
     }
 
-    public long getToatalAmount() {
-        return this.toatalAmount;
+   
+    public long getTotalAmount() {
+        return this.totalAmount;
     }
 
-    public void setToatalAmount(long toatalAmount) {
-        this.toatalAmount = toatalAmount;
+    public void setTotalAmount(long totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public int getLineCount() {
         return this.lines.size();
     }
-
 }

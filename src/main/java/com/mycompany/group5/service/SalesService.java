@@ -120,7 +120,7 @@ public class SalesService {
 
         LocalDate saleDate = cart.getSaleDate();
 
-        // Bước 1: Kiểm tra đa hình validateSale cho tất cả sản phẩm trong giỏ
+      
         for (CartItem item : cart.getItems().values()) {
             Product product = this.productService.findById(item.getProductId());
             if (product == null) {
@@ -129,7 +129,7 @@ public class SalesService {
             product.validateSale(saleDate, item.getQuantity());
         }
 
-        // Bước 2: Trừ tồn kho và tạo danh sách InvoiceLine
+       
         List<InvoiceLine> lines = new ArrayList<>();
         for (CartItem item : cart.getItems().values()) {
             Product product = this.productService.findById(item.getProductId());
@@ -137,7 +137,7 @@ public class SalesService {
             lines.add(new InvoiceLine(product, item.getQuantity()));
         }
 
-        // Bước 3: Tạo Invoice, khóa giỏ hàng và lưu vào Map
+      
         Invoice invoice = new Invoice(cleanInvoiceId, saleDate, lines);
         cart.setConfirmed(true);
         this.invoices.put(invoice.getInvoiceId(), invoice);
