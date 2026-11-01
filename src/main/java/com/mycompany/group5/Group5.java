@@ -97,7 +97,7 @@ public class Group5 {
     // ==============================================================
 
     private void menuProductManagement() {
-        do{
+        
         System.out.println("\n--- [1] PRODUCT CATALOG MANAGEMENT ---");
         System.out.println("1. View all products");
         System.out.println("2. Search product by ID");
@@ -135,7 +135,7 @@ public class Group5 {
             default:
                 System.out.println("Invalid selection!");
             }
-        }while(choice != 0);
+        
     }
 
     private void addNewProduct() {
