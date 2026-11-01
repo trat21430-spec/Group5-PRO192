@@ -37,13 +37,13 @@ public class FileStorageManager {
             throw new IllegalArgumentException("Product file must not be null or empty");
         }
         if (invoiceFilePath == null || invoiceFilePath.trim().isEmpty()) {
-            throw new IllegalArgumentException("Product file must not be null or empty");
+            throw new IllegalArgumentException("Invoice file must not be null or empty");
         }
         this.productFilePath = productFilePath.trim();
         this.invoiceFilePath = invoiceFilePath.trim();
     }
 
-    public boolean saveProduct(List<Product> products) {
+    public boolean saveProducts(List<Product> products) {
         if (products == null) {
             return false;
         }
@@ -67,7 +67,7 @@ public class FileStorageManager {
         }
     }
 
-    public Map<String, Product> loadProduct() {
+    public Map<String, Product> loadProducts() {
         Map<String, Product> products = new LinkedHashMap<>();
         // đa hình
         File file = new File(this.productFilePath);
@@ -105,7 +105,7 @@ public class FileStorageManager {
         return products;
     }
 
-    public boolean saveInvoice(List<Invoice> invoices) {
+    public boolean saveInvoices(List<Invoice> invoices) {
         if (invoices == null) {
             return false;
         }
@@ -114,7 +114,7 @@ public class FileStorageManager {
                 new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8))) {
             for (Invoice p : invoices) {
 
-                writer.write("INVOCES|" + p.getInvoiceId() + "|" + p.getSaleDate() + "\n");
+                writer.write("INV|" + p.getInvoiceId() + "|" + p.getSaleDate() + "\n");
                 for (InvoiceLine line : p.getLines()) {
                     writer.write("LINE|" + line.getProductId() + "|" + line.getProductName() + "|"
                             + line.getUnitPrice() + "|" + line.getQuantity() + "\n");
@@ -127,7 +127,7 @@ public class FileStorageManager {
         }
     }
 
-    public List<Invoice> loadInvoice() {
+    public List<Invoice> loadInvoices() {
         List<Invoice> invoices = new ArrayList<>();
         // đa hình
         File file = new File(this.invoiceFilePath);
@@ -167,8 +167,8 @@ public class FileStorageManager {
                 invoices.add(new Invoice(currentInvoiceId,currentSaleDate,currentLines));
             }
         } catch (Exception e) {
-            System.err.println("Error reads file pf product" + e.getMessage());
-            throw new RuntimeException("can not reading file of product"
+            System.err.println("Error reads file of invoices" + e.getMessage());
+            throw new RuntimeException("can not reading file of invoices"
                     + e.getMessage(), e);
         }
         return invoices;
