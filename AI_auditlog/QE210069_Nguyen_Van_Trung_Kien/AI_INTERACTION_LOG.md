@@ -95,4 +95,34 @@
 
 ---
 
+### Lần 5: Hỗ trợ lập trình Menu điều khiển Console (`Group5.java`) và tích hợp hệ thống
+
+- **Ngày thực hiện:** 01/11/2026
+- **Công cụ AI sử dụng:** Antigravity (Google DeepMind)
+- **Mục đích sử dụng:**
+  1. **Hỗ trợ xây dựng giao diện Console và luồng điều khiển trong `Group5.java`:**
+     - Sử dụng AI để tư vấn cấu trúc điều hướng Menu chính (6 chức năng nghiệp vụ) và các Menu con: Quản lý danh mục sản phẩm, Quản lý kho hàng, Bán hàng & Giỏ hàng, Tra cứu hóa đơn và Lưu trữ dữ liệu.
+     - Tham khảo cách viết các hàm nhập liệu phòng thủ (`readInt`, `readLong`, `readString`, `readDate`) sử dụng `Scanner` kết hợp `try-catch` để chống crash ứng dụng khi người dùng nhập sai kiểu dữ liệu (chuỗi thay vì số, sai định dạng ngày `yyyy-MM-dd`).
+     - Hỗ trợ định dạng bảng hiển thị trực quan (`printf`) cho danh sách sản phẩm, chi tiết giỏ hàng và hóa đơn bán hàng.
+  2. **Tích hợp các module của nhóm vào chương trình chính:**
+     - Ráp nối các tầng: `FileStorageManager` (Lưu trữ) ↔ `ProductService` (Quản lý hàng) ↔ `SalesService` & `Cart` (Nghiệp vụ bán hàng).
+
+- **Trạng thái (Status):** **IN PROGRESS / CHƯA HOÀN TOÀN HOÀN THIỆN (CÒN LỖI CHƯA SỬA ĐƯỢC)**
+  - Đã dựng được khung sườn luồng xử lý và giao diện console của 6 nhóm chức năng.
+  - Tuy nhiên, hệ thống **vẫn chưa hoàn toàn hoàn thiện** và đang ghi nhận một số lỗi/thiếu sót chưa xử lý dứt điểm:
+    1. *Lỗi nạp sản phẩm mẫu ban đầu:* Khi file dữ liệu `products.txt` trống, chương trình có in thông báo tự động nạp 5 sản phẩm mẫu nhưng trong constructor chưa thực sự add các đối tượng `RegularProduct` và `ExpiringProduct` vào map trước khi lưu, dẫn đến danh mục vẫn bị rỗng khi khởi động lần đầu.
+    2. *Chưa đồng bộ hóa đơn cũ (`oldInvoices`):* Dữ liệu hóa đơn cũ được đọc từ `invoices.txt` mới chỉ lưu ở biến cục bộ trong `Group5.java` mà chưa được nạp vào `SalesService`. Việc này dẫn đến việc không xem lại được hóa đơn cũ trong chức năng tra cứu, và biến đếm mã hóa đơn (`invoiceCounter`) chưa đồng bộ theo mã lớn nhất của hóa đơn cũ (nguy cơ trùng lặp mã `INV001` khi tạo hóa đơn mới sau khi khởi động lại).
+    3. *Luồng kiểm tra tồn kho và lưu tự động sau khi thanh toán:* Cần hoàn thiện cơ chế tự động ghi đè dữ liệu mới xuống file ngay sau mỗi giao dịch thanh toán thành công để tránh mất mát dữ liệu nếu tắt ứng dụng đột ngột.
+
+- **Phần sinh viên quan sát, phản biện và tự điều chỉnh (Human-in-the-loop):**
+  - **Tự tay lập trình và kiểm soát mã nguồn:** Toàn bộ code trong `Group5.java` do sinh viên tự tay gõ và kiểm soát trên NetBeans IDE 17, không để AI tự động chèn code vào project nhằm hiểu rõ luồng chạy thực tế.
+  - **Tự phát hiện lỗi và đánh giá tiến độ:** Không vội vàng kết luận hoàn thành khi code vừa chạy được khung bên ngoài; sinh viên đã chủ động chạy thử từng chức năng, phát hiện ra các điểm nghẽn logic (danh mục rỗng, hóa đơn cũ chưa hiển thị, chưa đồng bộ mã hóa đơn) và ghi nhận rõ ràng vào nhật ký để tiếp tục sửa chữa cùng nhóm.
+
+- **Kế hoạch tiếp theo:**
+  - Viết bổ sung phương thức `loadExistingInvoices(...)` vào `SalesService.java` để nạp danh sách hóa đơn cũ và cập nhật `invoiceCounter`.
+  - Sửa logic khởi tạo nạp 5 sản phẩm mẫu mặc định (P01 đến P05) vào map trong `Group5.java`.
+  - Kiểm thử lại toàn diện 11 ca nghiệm thu MM01–MM11 qua giao diện Console trước khi đóng gói và bàn giao.
+
+---
+
 *(Nhật ký sẽ tiếp tục được cập nhật khi có các lần tương tác AI tiếp theo)*
