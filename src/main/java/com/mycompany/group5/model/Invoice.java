@@ -48,10 +48,9 @@ public class Invoice {
         }
         this.subtotal = sum;
 
-        if (this.subtotal >= 1000000) {
-            this.discount = (this.subtotal * 10) / 100;
-        } else if (this.subtotal >= 500000) {
-            this.discount = (this.subtotal * 5) / 100;
+        
+        if (this.subtotal >= 200000) {
+            this.discount = (this.subtotal * 5 + 50) / 100;
         } else {
             this.discount = 0;
         }
