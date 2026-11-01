@@ -122,7 +122,7 @@ public class FileStorageManager {
             }
             return true;
         } catch (Exception e) {
-            System.err.println("Error writes file of Product" + e.getMessage());
+            System.err.println("Error writes file of Invoices" + e.getMessage());
             return false;
         }
     }
