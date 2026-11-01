@@ -65,5 +65,34 @@
     - *Điều chỉnh của Leader:* Buộc Trà sửa lại đúng quy định duy nhất của đề tài P02: chỉ giảm $5\%$ khi tổng tiền $S \ge 200.000$đ, áp dụng công thức làm tròn 0,5 lên: `D = (S * 5 + 50) / 100`.
     - **Nắm vững bản chất OOP:** Khi thắc mắc việc gọi `product.validateSale(...)` trong khi phương thức này là `abstract` ở lớp cha `Product`, tôi đã cùng AI phân tích sâu cơ chế **Liên kết động (Dynamic Binding)** tại thời điểm Runtime của máy ảo Java (JVM). Qua đó, tôi hiểu tường tận cách JVM tự động kích hoạt hành vi kiểm tra của `RegularProduct` hoặc `ExpiringProduct` mà không cần `if-else`, chuẩn bị sẵn luận điểm vững chắc để thuyết trình trước hội đồng bảo vệ.
 - **Kế hoạch tiếp theo:** Hoàn thiện nốt module lưu trữ và khôi phục dữ liệu (`FileStorageManager.java`) và xây dựng Menu Console hoàn chỉnh (`Group5.java`) để ráp nối toàn bộ hệ thống.
+
 ---
+
+### Lần 4: Lập trình tầng Lưu trữ (`FileStorageManager.java`) và thiết kế Menu Console
+
+- **Ngày thực hiện:** 01/11/2026
+- **Công cụ AI sử dụng:** Antigravity (Google DeepMind)
+- **Mục đích sử dụng:**
+  1. **Hỗ trợ tư vấn và hướng dẫn code tầng Lưu trữ (`FileStorageManager.java`):**
+     - Nhờ Antigravity làm trợ lý hướng dẫn cách tư duy kiến trúc và kết nối tầng Storage với `ProductService` và `SalesService` theo đúng yêu cầu đề bài P02 (không để AI tự viết code vào project, sinh viên yêu cầu AI hướng dẫn từng bước để tự tay lập trình).
+     - Hướng dẫn cấu trúc định dạng file văn bản `.txt` phân tách bằng dấu gạch đứng `|`, mã hóa UTF-8, sử dụng đường dẫn tương đối `data/products.txt` và `data/invoices.txt`.
+     - Hỗ trợ giải thích và gỡ các lỗi biên dịch trên NetBeans: phân biệt rõ `List<InvoiceLine>` thay vì `List<Invoice>` cho tham số của `Invoice`, tách biệt code đọc sản phẩm và code đọc hóa đơn.
+     - Hỗ trợ chạy kiểm thử tự động độc lập xác nhận khả năng phục hồi Đa hình (`RegularProduct` / `ExpiringProduct`) và khôi phục toàn vẹn dữ liệu hóa đơn kèm tính toán tài chính.
+  2. **Tư vấn kiến trúc Menu điều khiển (`Menu.java`):**
+     - Nhờ AI tư vấn khung sườn menu 6 chức năng nghiệp vụ bắt buộc và các hàm nhập liệu phòng thủ (Defensive Input Helper) chống crash ứng dụng khi người dùng nhập sai kiểu dữ liệu.
+
+- **Trạng thái (Status):** **COMPLETE** (Lớp `FileStorageManager.java` đã hoàn thành 100%, biên dịch sạch và vượt qua các bài kiểm thử lưu/đọc dữ liệu; hoàn tất khung sườn Menu sẵn sàng tích hợp).
+
+- **Phần sinh viên quan sát, phản biện và tự điều chỉnh (Human-in-the-loop):**
+  - **Phản biện loại bỏ hàm thừa `ensureParentDirectories()`:**
+    - *Tình huống:* AI đề xuất thêm hàm `ensureParentDirectories()` vào `FileStorageManager` để tự động kiểm tra và tạo thư mục cha `data/`.
+    - *Phản biện của sinh viên:* Tôi đã phát hiện và phản biện lại ngay rằng thư mục `data/` đã được tôi chủ động tạo và đẩy lên Git từ commit khởi tạo ban đầu (`Khoi tao cay thu muc du an cho 5 module`). Vì thư mục `data/` đã chắc chắn tồn tại trên mọi máy tính khi clone dự án về, nên hàm này là hoàn toàn dư thừa. Tôi yêu cầu loại bỏ hoàn toàn hàm này để giữ cho cấu trúc lớp ngắn gọn, sạch sẽ và khớp $100\%$ với Class Diagram đã duyệt.
+  - **Chủ động tự code và rà soát lỗi:**
+    - Kiên quyết từ chối việc để AI sinh code tự động vào dự án; yêu cầu AI giải thích bản chất để tự tay gõ từng dòng mã nguồn trên NetBeans IDE 17.
+    - Trong quá trình lập trình, đã tự rà soát và khắc phục các lỗi lệch chuẩn: sửa tên hàm thành số nhiều (`saveProducts`, `loadProducts`, `saveInvoices`, `loadInvoices`) khớp với Class Diagram, sửa lỗi gõ nhầm `"INVOCES|"` thành `"INV|"`, và chuẩn hóa các câu thông báo lỗi ngoại lệ.
+
+- **Kế hoạch tiếp theo:** Hoàn thiện nốt phần ráp nối `Menu.java` vào hàm `main` của `Group5.java` để sẵn sàng demo toàn diện 11 ca nghiệm thu MM01–MM11 trước giảng viên.
+
+---
+
 *(Nhật ký sẽ tiếp tục được cập nhật khi có các lần tương tác AI tiếp theo)*
